@@ -66,7 +66,8 @@ The output of the calibration toolbox looks like:
 ```
 Note that the number of inverse polynomial coefficients (12 in the above case) may vary in your calibration. 
 
-We use 22 parameters for intrinsics. They are defined, by order, as follows
+We use 24 parameters for intrinsics. They are defined, by order, as follows
+* image width and height (2)
 * polynomial coefficients (5)
 * image center (2)
 * affine distortion (3)
