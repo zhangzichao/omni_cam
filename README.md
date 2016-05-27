@@ -14,6 +14,7 @@ We provide the implementation as a ROS package. The dependencies are:
 * [eigen_catkin](https://github.com/ethz-asl/eigen_catkin)
 * [glog_catkin](https://github.com/ethz-asl/glog_catkin)
 * [eigen_checks](https://github.com/ethz-asl/eigen_checks): only used in unit tests.
+* [gflags_catkin](https://github.com/ethz-asl/gflags_catkin)(optional)
 
 Clone the packages into your workspace, then clone this repository and compile.
 
