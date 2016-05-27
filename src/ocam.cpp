@@ -18,10 +18,12 @@ Eigen::Matrix2d distortionToAffineCorrection(const Eigen::Vector3d& distortion)
 }  // namespace
 
 OCam::OCam(
+    const Eigen::Vector2i& image_size,
     const Eigen::Matrix<double, 5, 1>& polynomial,
     const Eigen::Vector2d& principal_point, const Eigen::Vector3d& distortion,
     const Eigen::Matrix<double, 12, 1>& inverse_polynomial)
-: polynomial_(polynomial), principal_point_(principal_point),
+: image_size_(image_size),
+  polynomial_(polynomial), principal_point_(principal_point),
   inverse_polynomial_(inverse_polynomial),
   affine_correction_(distortionToAffineCorrection(distortion)),
   affine_correction_inverse_(affine_correction_.inverse())
@@ -113,6 +115,7 @@ void OCam::project3(
 void OCam::print(std::ostream& out) const
 {
   out << "  Projection = Omni" << std::endl;
+  out << "  Image size = " << image_size_.transpose() << std::endl;
   out << "  Polynomial = " << polynomial_.transpose() << std::endl;
   out << "  Principal point = " << principal_point_.transpose() << std::endl;
   out << "  Inverse polynomial = " << inverse_polynomial_.transpose()
@@ -157,12 +160,16 @@ OCamPtr OCam::loadOCam(const std::string& parameter_file)
     return OCamPtr();
   }
 
+  Eigen::Vector2i image_size;
   Eigen::Matrix<double, 5, 1> polynomial;
   Eigen::Vector2d principal_point;
   Eigen::Vector3d distortion;
   Eigen::Matrix<double, kInversePolynomialOrder, 1> inverse_polynomial;
 
   // TODO: use exception here
+
+  param_fs >> image_size(0) >> image_size(1);
+  CHECK(param_fs.good()) << "Reading image size fails.";
   param_fs >>
       polynomial(0) >> polynomial(1) >> polynomial(2) >> polynomial(3) >> polynomial(4);
   CHECK(param_fs.good()) << "Reading polynomial fails.";
@@ -180,7 +187,7 @@ OCamPtr OCam::loadOCam(const std::string& parameter_file)
   CHECK(param_fs.good()) << "Reading inverse polynomial fails.";
 
   return std::make_shared<OCam>(
-        polynomial, principal_point, distortion, inverse_polynomial);
+        image_size, polynomial, principal_point, distortion, inverse_polynomial);
 }
 
 }  // namespace omni_cam

@@ -16,11 +16,12 @@ class OCam
  public:
   static constexpr int kInversePolynomialOrder = 12;
 
-  OCam(const Eigen::Matrix<double, 5, 1>& polynomial,
-                 const Eigen::Vector2d& principal_point,
-                 const Eigen::Vector3d& distortion,
-                 const Eigen::Matrix<double, kInversePolynomialOrder, 1>&
-                 inverse_polynomial);
+  OCam(
+      const Eigen::Vector2i& image_size,
+      const Eigen::Matrix<double, 5, 1>& polynomial,
+      const Eigen::Vector2d& principal_point,
+      const Eigen::Vector3d& distortion,
+      const Eigen::Matrix<double, kInversePolynomialOrder, 1>& inverse_polynomial);
 
   void backProject3(
       const Eigen::Ref<const Eigen::Vector2d>& keypoint,
@@ -43,6 +44,8 @@ class OCam
   Eigen::VectorXd getDistortionParameters() const;
 
  private:
+  const Eigen::Vector2i image_size_;
+
   const Eigen::Matrix<double, 5, 1> polynomial_;
   const Eigen::Vector2d principal_point_;
   const Eigen::Matrix<double, 12, 1> inverse_polynomial_;
