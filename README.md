@@ -73,7 +73,7 @@ We use 24 parameters for intrinsics. They are defined, by order, as follows
 * affine distortion (3)
 * inverse polynomial coefficients(12)
 
-You need to copy the corresponding parts from the toolbox output and paste them into __one line__ following the above order.
+You need to copy the corresponding parts from the toolbox output and paste them into __one space separated line__ following the above order.
 Check the `ocam_param.txt` in the `test` folder for a example.
 
 There are two things that need to be noticed:
