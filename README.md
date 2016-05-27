@@ -10,13 +10,14 @@ Note that the visibility check in this implementation only checks the boundary o
 
 ## How to Install
 We provide the implementation as a ROS package. The dependencies are:
+* [catkin_simple](https://github.com/catkin/catkin_simple)
 * [eigen_catkin](https://github.com/ethz-asl/eigen_catkin)
 * [glog_catkin](https://github.com/ethz-asl/glog_catkin)
 * [eigen_checks](https://github.com/ethz-asl/eigen_checks): only used in unit tests.
 
 Clone the packages into your workspace, then clone this repository and compile.
 
-The first two are just catkin wrappers for `eigen` and `glog`.
+The second and the third are just catkin wrappers for `eigen` and `glog`.
 If you do not use catkin, it should be easy to adapt the code to work with the plain packages.
 
 ## Polynomial Camera Model
