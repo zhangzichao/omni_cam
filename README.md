@@ -6,6 +6,8 @@ the [OCamCalib](https://sites.google.com/site/scarabotix/ocamcalib-toolbox) tool
 In this code, the projection and backprojection functions are implemented.
 The Jacobian for the projection (i.e., image coordinates w.r.t. 3D point) is implemented as well.
 
+Note that the visibility check in this implementation only checks the boundary of the image. Since images from fisheye and catadioptric cameras usually occupy only part of the image rectangle (e.g., a circle in the center), you probably want to add a mask when using this implementation in your project.
+
 ## How to Install
 We provide the implementation as a ROS package. The dependencies are:
 * [eigen_catkin](https://github.com/ethz-asl/eigen_catkin)
@@ -17,7 +19,7 @@ Clone the packages into your workspace, then clone this repository and compile.
 The first two are just catkin wrappers for `eigen` and `glog`.
 If you do not use catkin, it should be easy to adapt the code to work with the plain packages.
 
-## Camera Model
+## Polynomial Camera Model
 The camera model uses polynomials to calculate the projection and backprojection functions.
 It is able to deal with fisheye cameras and catadioptric cameras within one framework.
 
