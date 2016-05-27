@@ -112,6 +112,15 @@ void OCam::project3(
   }
 }
 
+bool OCam::isKeypointVisible(const Eigen::Vector2d& kp) const
+{
+  int x = static_cast<int>(std::floor(kp(0)));
+  int y = static_cast<int>(std::floor(kp(1)));
+
+  return x >=0 && x < image_size_(0) &&
+      y >= 0 && y < image_size_(1);
+}
+
 void OCam::print(std::ostream& out) const
 {
   out << "  Projection = Omni" << std::endl;

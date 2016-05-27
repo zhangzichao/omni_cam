@@ -63,6 +63,27 @@ TEST_F(OCamTest, Backprojection)
   EXPECT_TRUE(EIGEN_MATRIX_NEAR(expected_bearing, bearing, kEpsBackprojection));
 }
 
+TEST_F(OCamTest, VisibilityCheck)
+{
+  Eigen::Vector2d zero(0.0, 0.0);
+  EXPECT_TRUE(ocam_->isKeypointVisible(zero));
+
+  Eigen::Vector2d limit(639.9, 479.9); // hardcoded
+  EXPECT_TRUE(ocam_->isKeypointVisible(limit));
+
+  Eigen::Vector2d negative_x(-0.1, 0.0);
+  EXPECT_FALSE(ocam_->isKeypointVisible(negative_x));
+
+  Eigen::Vector2d bound(640.0, 470.0); // consider the exact boundary as invisible
+  EXPECT_FALSE(ocam_->isKeypointVisible(bound));
+
+  Eigen::Vector2d negative_y(0.1, -0.1);
+  EXPECT_FALSE(ocam_->isKeypointVisible(negative_y));
+
+  Eigen::Vector2d out_far(600, 490);
+  EXPECT_FALSE(ocam_->isKeypointVisible(negative_y));
+}
+
 
 int main(int argc, char** argv)
 {

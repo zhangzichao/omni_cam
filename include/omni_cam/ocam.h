@@ -32,6 +32,8 @@ class OCam
       Eigen::Vector2d* out_keypoint,
       Eigen::Matrix<double, 2, 3>* out_jacobian_point) const;
 
+  bool isKeypointVisible(const Eigen::Vector2d& kp) const;
+
   void print(std::ostream& out) const;
 
   static OCamPtr loadOCam(const std::string& parameter_file);
