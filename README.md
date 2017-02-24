@@ -45,43 +45,7 @@ You can find the usage of the class in more details from the unit tests.
 
 
 ## Convert Matlab toolbox output to Calibration File
-The output of the calibration toolbox looks like:
+Use the script `scripts/matlab_to_cpp.py`
 ```
-#polynomial coefficients for the DIRECT mapping function (ocam_model.ss in MATLAB). These are used by cam2world
-
-5 -2.065170e+02 0.000000e+00 2.207161e-03 -4.879622e-06 1.865656e-08 
-
-#polynomial coefficients for the inverse mapping function (ocam_model.invpol in MATLAB). These are used by world2cam
-
-12 294.182260 152.289570 -12.191217 27.959546 8.241525 -1.970397 10.689256 1.871609 -6.437684 0.430037 3.215544 0.921484 
-
-#center: "row" and "column", starting from 0 (C convention)
-
-241.800066 394.552874
-
-#affine parameters "c", "d", "e"
-
-1.000330 0.000219 0.000257
-
-#image size: "height" and "width"
-
-480 752
-
+./matlab_to_cpp.py input_file output_file
 ```
-Note that the number of inverse polynomial coefficients (12 in the above case) may vary in your calibration. 
-
-We use 24 parameters for intrinsics. They are defined, by order, as follows
-* image width and height (2)
-* polynomial coefficients (5)
-* image center (2)
-* affine distortion (3)
-* inverse polynomial coefficients(12)
-
-You need to copy the corresponding parts from the toolbox output and paste them into __one space separated line__ following the above order.
-Check the `ocam_param.txt` in the `test` folder for a example.
-
-There are two things that need to be noticed:
-
-1. **image center**: since Matlab uses row major convention, you will need to swap the values before fill them in.
-2. **inverse polynomial coefficients**: it is possible that the number of the inverse polynomial coefficients from the toolbox is less than 12. In this case, just pad the polynomial (from the end) with `0.0` to the length of 12.
-In theory it can also happen (we rarely encounter it in practice) that the number is more than 12, in this case you will have to modify the code to increase the supported inverse polynomial order.
