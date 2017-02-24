@@ -3,7 +3,7 @@
   <name>omni_cam</name>
   <version>0.0.0</version>
   <description>Polynomial omnidirection camera model</description>
-  <maintainer email="zzhang@ifi.uzh.ch">cforster</maintainer>
+  <maintainer email="zzhang@ifi.uzh.ch">Zichao Zhang</maintainer>
   <license>New BSD</license>
   
   <buildtool_depend>catkin</buildtool_depend>
