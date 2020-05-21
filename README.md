@@ -8,6 +8,19 @@ The Jacobian for the projection (i.e., image coordinates w.r.t. 3D point) is imp
 
 Note that the visibility check in this implementation only checks the boundary of the image. Since images from fisheye and catadioptric cameras usually occupy only part of the image rectangle (e.g., a circle in the center), you probably want to add a mask when using this implementation in your project.
 
+If you use this code in academic context, please cite the following paper:
+
+Zichao Zhang, Henri Rebecq, Christian Forster, Davide Scaramuzza: Benefit of Large Field-of-View Cameras for Visual Odometry, IEEE International Conference on Robotics and Automation (ICRA), 2016.
+
+```
+@InProceedings{Zhang16icra,
+  author = {Zhang, Zichao and Rebecq, Henri and Forster, Christian and Scaramuzza, Davide},
+  title = {Benefit of Large Field-of-View Cameras for Visual Odometry},
+  booktitle = {IEEE International Conference on Robotics and Automation (ICRA)},
+  year = {2016}
+}
+```
+
 ## How to Install
 We provide the implementation as a ROS package. The dependencies are:
 * [catkin_simple](https://github.com/catkin/catkin_simple)
